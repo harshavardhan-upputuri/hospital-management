@@ -2,9 +2,7 @@ package com.codingshuttle.youtube.hospitalManagement.entity;
 
 import com.codingshuttle.youtube.hospitalManagement.entity.type.BloodGroupType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -26,6 +24,9 @@ import java.util.List;
                 @Index(name = "idx_patient_birth_date", columnList = "birthDate")
         }
 )
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Patient {
 
     @Id
@@ -34,6 +35,10 @@ public class Patient {
 
     @Column(nullable = false, length = 40)
     private String name;
+
+    @OneToOne
+    @MapsId
+    private  User user;
 
     //    @ToString.Exclude
     private LocalDate birthDate;
